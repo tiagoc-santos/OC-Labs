@@ -4,7 +4,7 @@ uint8_t L1Cache[L1_SIZE];
 uint8_t L2Cache[L2_SIZE];
 uint8_t DRAM[DRAM_SIZE];
 uint32_t time;
-Cache cache;
+L1_Cache cache;
 
 /**************** Time Manipulation ***************/
 void resetTime() { time = 0; }
@@ -62,7 +62,7 @@ void accessL1(uint32_t address, uint8_t *data, uint32_t mode) {
     accessDRAM(address - offset, TempBlock, MODE_READ); // get new block from DRAM
 
     if ((Line->Valid) && (Line->Dirty)) { // line has dirty block
-      accessDRAM(Line->Tag - offset, Line->Block_Data, MODE_WRITE); // then write back old block
+      accessDRAM(address - offset, Line->Block_Data, MODE_WRITE); // then write back old block
     }
 
     memcpy(Line->Block_Data, TempBlock, BLOCK_SIZE); // copy new block to cache line
