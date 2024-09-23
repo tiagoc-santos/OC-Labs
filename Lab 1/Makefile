@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS=-Wall -Wextra
-TARGET=4.2/L2Cache
+TARGET=4.3/L2AssociativeCache
 all:
 	$(CC) $(CFLAGS) tests/SimpleProgram.c $(TARGET).c -o $(TARGET)
 
 clean:
-	rm $(TARGET) 4.1/L1Cache 
+	rm $(TARGET) 
